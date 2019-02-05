@@ -17,6 +17,7 @@ You need to install the following softwares/tools to run this project.
 Download the project to your local machine and open in Visual Studio.
 Connect to the SQL Server and create an empty database and update the connection string in web.config file. 
 Run the project.
+After the site is opened in your browser, you can login with Super Admin account which you can found in startup.cs file.
 
 ## Running the tests
 
