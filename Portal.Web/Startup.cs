@@ -36,8 +36,8 @@ namespace Portal.Web
                 //Here we create a Super Admin user who will maintain the website                   
 
                 var user = new ApplicationUser();
-                user.UserName = "admin@portal.com";
-                user.Email = "admin@portal.com";
+                user.UserName = "superadmin@portal.com";
+                user.Email = "superadmin@portal.com";
                 string userPWD = "P@ssw0rd";
 
                 var chkUser = UserManager.Create(user, userPWD);
