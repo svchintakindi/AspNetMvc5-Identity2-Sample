@@ -1,0 +1,34 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+@{
+    ViewBag.Title = "Edit Role";
+}
+
+<div class="card">
+    <div class="card-header bg-info">
+        Edit Role 
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+            <div>
+                Role name
+            </div>
+            <p>
+                @Html.TextBoxFor(model => model.Name, new { })
+            </p>
+            <input type="submit" class="btn btn-primary" value="Save" />
+            @Html.ActionLink("Cancel", "Index", "Roles", new { Area = "SuperAdmin" }, new { @class="btn btn-secondary"})
+        }
+    </div>
+    @if (ViewBag.ResultMessage != null)
+    {
+        <div class="card-footer text-danger">
+            @ViewBag.ResultMessage
+        </div>
+    }
+</div>
+
+@Html.ActionLink("List Roles", "Index") | @Html.ActionLink("Manage User Role", "ManageUserRoles")

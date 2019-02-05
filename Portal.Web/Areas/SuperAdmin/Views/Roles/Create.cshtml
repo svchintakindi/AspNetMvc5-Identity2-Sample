@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Create New Role";
+}
+
+<div class="card border-info">
+    <div class="card-header bg-info d-flex justify-content-between align-items-center">
+        <h5 class="card-title text-light">Create Role</h5>
+        <div><a href="@Url.Action("Index", "Roles", new { Area = "SuperAdmin" })" class="btn btn-light" title="Back to Roles List"><i class="fas fa-arrow-left"></i> Back</a></div>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Create", "Roles", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            
+            <div class="form-group">                
+                <input type="text" class="form-control" id="RoleName" name="RoleName" required="required" placeholder="Enter the Role Name">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Save</button>
+        }
+    </div>
+    @if (ViewBag.ResultMessage != null)
+    {
+        <div class="card-footer text-danger">
+            @ViewBag.ResultMessage
+        </div>
+    }
+</div>

@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Manage User Roles";
+}
+
+<h4>Manage User Roles</h4>
+
+@if (ViewBag.ResultMessage != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.ResultMessage
+    </div>
+}
+
+<div class="row">
+    <div class="col">
+        <div class="card border-secondary">
+            <div class="card-header bg-secondary">
+                <h5 class="card-title text-light">Get Roles of a User</h5>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("GetRoles", "Roles", FormMethod.Post, new { @class = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label for="UserEmail">Email address : </label>
+                        <input type="email" class="form-control" id="UserEmail" name="UserEmail" placeholder="Enter email address of the user" required="required">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Get Roles for this User</button>
+                    </div>
+                }
+                @if (ViewBag.RolesForThisUser != null)
+                {
+                    <ul class="list-group">
+                        <li class="list-group-item active">Roles for this User</li>
+                        @foreach (string s in ViewBag.RolesForThisUser)
+                {
+                            <li class="list-group-item">@s</li>
+                        }
+                    </ul>
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card border-secondary">
+            <div class="card-header bg-secondary">
+                <h5 class="card-title text-light">Add User to a Role</h5>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("RoleAddToUser", "Roles", FormMethod.Post, new { @class = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        <label for="UserEmail">Email address : </label>
+                        <input type="email" class="form-control" id="UserEmail" name="UserEmail" placeholder="Enter email address of the user" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="Roles">Role Name : </label>
+                        @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...", new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card border-secondary">
+            <div class="card-header bg-secondary">
+                <h5 class="card-title text-light">Delete a User from a Role</h5>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("DeleteRoleForUser", "Roles", FormMethod.Post, new { @class = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        <label for="UserEmail">Email address : </label>
+                        <input type="email" class="form-control" id="UserEmail" name="UserEmail" placeholder="Enter email address of the user" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="Roles">Role Name : </label>
+                        @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...", new { @class = "form-control", required = "required" })
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Delete this user from Role</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="clearfix"> &nbsp; </div>
+
+
+
+<div class="clearfix"> &nbsp; </div>
+
+

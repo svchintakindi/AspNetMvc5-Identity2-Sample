@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityUser>
+@{
+    ViewBag.Title = "System Users";
+    var Roles = ViewBag.Roles as IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>;
+}
+<div class="card">
+    <div class="card-header bg-info d-flex justify-content-between align-items-center">
+        <h5 class="card-title text-light">System Users</h5>
+        <div>
+            <a href="@Url.Action("CreateUser", "Roles", new { Area = "SuperAdmin" })" class="btn btn-light" title="Add a new User"><i class="fas fa-user-plus"></i> Add User</a>
+            <a href="@Url.Action("Index", "Roles", new { Area = "SuperAdmin" })" class="btn btn-light" title="Manage Roles"><i class="fas fa-dice-d20"></i> Manage Roles</a>
+        </div>
+    </div>
+    <ul class="list-group">
+        @foreach (var user in Model)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center border-info">
+                <div>
+                    <span>@user.Email</span>
+                    @foreach (var item in user.Roles)
+                    {
+                        <span class="badge badge-info">@Roles.Where(r => r.Id == item.RoleId).FirstOrDefault().Name</span>
+                    }                
+                </div>
+                <div>
+                    <a class="btn btn-outline-primary" title="Update user Roles" href="/superadmin/roles/update/@user.Id">Update</a>
+                </div>
+            </li>
+        }
+    </ul>
+    @if (TempData["ResultMessage"] != null)
+    {
+        <div class="card-footer text-danger">
+            @TempData["ResultMessage"]
+        </div>
+    }
+</div>
+
