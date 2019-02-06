@@ -25,4 +25,4 @@ No Tests included
 
 ### License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License. You are free to download and use it in your projects. 
